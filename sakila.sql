@@ -110,18 +110,112 @@ Se pide:
         
         Ciudades con nombres compuestos.
         Películas con una duración entre 80 y 100.
+        
+        mysql> select title,length from film where length between 80 and 100;
+        +-------------------------+--------+
+        | title                   | length |
+        +-------------------------+--------+
+        | ACADEMY DINOSAUR        |     86 |
+        | ALICE FANTASIA          |     94 |
+        +----------------------------------+ 
+        147 rows in set (0,00 sec)
+        
         Peliculas con un rental_rate entre 1 y 3.
+        
+        mysql> select title,rental_rate from film where rental_rate between 1 and 3;
+        +-----------------------------+-------------+
+        | title                       | rental_rate |
+        +-----------------------------+-------------+
+        | ADAPTATION HOLES            |        2.99 |
+        | AFFAIR PREJUDICE            |        2.99 |
+        | AFRICAN EGG                 |        2.99 |
+        +-------------------------------------------+  
+        323 rows in set (0,00 sec)
+
         Películas con un titulo de más de 12 letras.
+        
+        mysql> select title from film where title regexp ".............";
+        +-----------------------------+
+        | title                       |
+        +-----------------------------+
+        | ACADEMY DINOSAUR            |
+        | ACE GOLDFINGER              |
+        +-----------------------------+
+        691 rows in set (0,00 sec)
+
         Peliculas con un rating de PG o G.
+        
+        
         Peliculas que no tengan un rating de NC-17.
+        
+        mysql> select title,rating from film where rating not in ("NC-17");
+        +-----------------------------+--------+
+        | title                       | rating |
+        +-----------------------------+--------+
+        | ACADEMY DINOSAUR            | PG     |
+        | ACE GOLDFINGER              | G      |
+        | AFFAIR PREJUDICE            | G      |
+        +--------------------------------------+
+        790 rows in set (0,00 sec)
+        
         Peliculas con un rating PG y duracion de más de 120.
+        
+        mysql> select title,rating,length from film where rating in ("PG") and length = 120;
+        Empty set (0,00 sec)
+        
         ¿Cuantos actores hay?
+        
+        mysql> select *  from actor;
+        +----------+-------------+--------------+---------------------+
+        | actor_id | first_name  | last_name    | last_update         |
+        +----------+-------------+--------------+---------------------+
+        |        1 | PENELOPE    | GUINESS      | 2006-02-15 04:34:33 |
+        |        2 | NICK        | WAHLBERG     | 2006-02-15 04:34:33 |
+        +-------------------------------------------------------------+
+        200 rows in set (0,00 sec)
+        
         ¿Cuántas ciudades tiene el country Spain?
         ¿Cuántos countries hay que empiezan por a?
         Media de duración de peliculas con PG.
+        
+        mysql> select avg(length) from film where rating in ("PG");
+            +-------------+
+            | avg(length) |
+            +-------------+
+            |    112.0052 |
+            +-------------+
+            1 row in set (0,00 sec)
+        
         Suma de rental_rate de todas las peliculas.
+        
+        mysql> select sum(rental_rate) from film;
+        +------------------+
+        | sum(rental_rate) |
+        +------------------+
+        |          2980.00 |
+        +------------------+
+        1 row in set (0,00 sec)
+        
         Pelicula con mayor duración.
+        
+        mysql> select max(length) from film;
+        +-------------+
+        | max(length) |
+        +-------------+
+        |         185 |
+        +-------------+
+        1 row in set (0,00 sec)
+        
         Película con menor duración.
+        
+        mysql> select min(length) from film;
+        +-------------+
+        | min(length) |
+        +-------------+
+        |          46 |
+        +-------------+
+        1 row in set (0,00 sec)
+        
         Mostrar las ciudades del country Spain (multitabla).
         Mostrar el nombre de la película y el nombre de los actores.
         Mostrar el nombre de la película y el de sus categorías.
